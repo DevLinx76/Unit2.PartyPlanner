@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Party Planner</title>
+</head>
+<body>
+  <div id="create-party">
+    <h2>Add/Edit a Party</h2>
+    <form action="submit">
+      <input type="hidden" name="id" /> <!-- Hidden field for the ID, used for updates -->
+      <label for="title">Party Name:</label>
+      <input type="text" id="title" name="title" required>
+      <label for="date">Time:</label>
+      <input type="datetime-local" id="date" name="date" required>
+      <label for="location">Location:</label>
+      <input type="text" id="location" name="location" required>
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" required></textarea>
+      <button type="submit" name="add-button">Submit</button>
+    </form>
+  </div>
 
+  <ul id="display-parties">
+    <!-- List of parties will be dynamically populated here -->
+  </ul>
+
+  <script src="index.js"></script>
+</body>
+</html>
