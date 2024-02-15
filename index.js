@@ -33,6 +33,9 @@ const createParty = async (partyData) => {
     getParties(); // Refresh the list of parties
   } catch (error) {
     console.error('POST Error:', error);
+    if (json && json.error) {
+      console.error('API Error:', json.error);
+    }
   }
 };
 
@@ -90,7 +93,7 @@ const renderEvents = () => {
     const partyElement = document.createElement("li");
     partyElement.innerHTML = `
       <h2>${party.name}</h2>
-      <p>${new Date(party.date).toLocaleString()}</p>
+      <p>${new Date(party.date).toISOString()}</p>
       <p>${party.location}</p>
       <p>${party.description}</p>
       <button onclick="deleteParty(${party.id})">Delete</button>
