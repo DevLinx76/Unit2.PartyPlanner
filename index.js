@@ -22,19 +22,21 @@ const getParties = async () => {
 
 // Add a new party
 const createParty = async (partyData) => {
+  let json; // Declare json variable outside the try block to widen its scope
   try {
     const response = await fetch(EVENTS_URI, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(partyData),
     });
-    const json = await response.json();
-    if (json.error) throw new Error(json.error);
+    json = await response.json(); // Attempt to parse the JSON response
+    if (json.error) throw new Error(json.error.message || 'Unknown Error'); // Throw an error if API responded with an error
     getParties(); // Refresh the list of parties
   } catch (error) {
     console.error('POST Error:', error);
+    // Now json is accessible here, but check if it's defined first
     if (json && json.error) {
-      console.error('API Error:', json.error);
+      console.error('API Error:', json.error.message); // More specific error message handling
     }
   }
 };
